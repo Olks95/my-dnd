@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem auto 2rem;
+}
+
+.flex-item {
+  flex: 1 0 28%; /* explanation below */
+  margin: 0.3rem;
+  padding: 0.5rem;
+  min-width: 10rem;
+  height: 100px;
+  border: solid black 1px;
+}
+
+.content {
+	margin-top: 0.3rem;
+}
+
+/* With a flex-basis of 28% there will be more than enough space for 3 items per line, but never enough for 4. */
