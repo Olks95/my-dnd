@@ -9,7 +9,7 @@
   margin: 0.3rem;
   padding: 0.5rem;
   min-width: 10rem;
-  height: 100px;
+  min-height: 10rem;
   border: solid black 1px;
 }
 
@@ -18,3 +18,7 @@
 }
 
 /* With a flex-basis of 28% there will be more than enough space for 3 items per line, but never enough for 4. */
+
+h1 {
+	font-size: 1.1rem;
+}
