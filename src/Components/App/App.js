@@ -6,16 +6,35 @@ import Playground from '../Playground/Playground.js';
 
 const App = () => {
   const [ userType, setUserType ] = useState('');
-  const [ characterList, setCharacterList ] = useState(['mLdzKAN7AAGt3qPP2']);
+  const [ characterList, setCharacterList ] = useState([
+    {
+      id: 'mLdzKAN7AAGt3qPP2',
+      name: 'Harley Merlin'
+    },
+    {
+      id: 'siQfxrFNzgWHoQk39',
+      name: 'Surina Kerrhylon'
+    },
+    {
+      id: 'xS8JoRmvpsnjm529p',
+      name: 'Draud'
+    }
+  ]);
+  const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');
 
   const userTypeSelectHandler = (event) => {
     const selectedType = event.target.value;
     setUserType(selectedType);
   };
 
-  const addCharacterHandler = (characterId) => {
-    const newCharacterList = [...characterList, characterId]
+  const addCharacterHandler = (characterId, characterName) => {
+    const newCharacterList = [...characterList, { id: characterId, name: characterName }];
     setCharacterList(newCharacterList);
+  }
+
+  const selectCharacterHandler = (event) => {
+    const charId = event.target.value;
+    setSelectedCharacter(charId);
   }
 
   let content = (
@@ -27,9 +46,11 @@ const App = () => {
       <div className="main">
         <Playground 
         playgroundType={userType} 
-        returnHandler={userTypeSelectHandler} 
-        addCharacterHandler={addCharacterHandler} 
-        characters={characterList} />
+        onReturn={userTypeSelectHandler} 
+        onNewCharacter={addCharacterHandler} 
+        characters={characterList}
+        selectedChar={selectedCharacter} 
+        onCharSelect={selectCharacterHandler} />
       </div>
   )};
   return content;

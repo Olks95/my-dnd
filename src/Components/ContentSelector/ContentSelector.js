@@ -4,7 +4,7 @@ import { useDicecloud } from '../../Hooks/useDicecloud';
 import Character from '../Character/Character.js';
 
 export const Player = (props) => {
-	const [ isLoading, fetchedData ] = useDicecloud(props.characters[0]);
+	const [ isLoading, fetchedData ] = useDicecloud(props.selectedChar);
   	let loadedCharacter = null;
 
 	if(fetchedData) {

@@ -21,17 +21,17 @@ export const useDicecloud = (characterId) => {
 		let headers = new Headers();
 		headers.append('Accept', 'application/json');
 
-		console.log('Sending Http request for ' + characterUrl);
+		// console.log('Sending Http request for ' + characterUrl);
 	    fetch(proxyUrl + characterUrl, {
 	    	method: "GET",
 	    	headers: headers,
 	    	mode: 'cors'
 	    })
 	      .then(response => {
-	        // if (!response.ok) {
-	        //   	console.log(response.status)
-	        //   	throw new Error('Failed to fetch.');
-	        // }
+	        if (!response.ok) {
+	          	console.log(response.status)
+	          	throw new Error('Failed to fetch.');
+	        }
 	        // console.log(response)
 	        return response.json()
 	      })
@@ -40,9 +40,6 @@ export const useDicecloud = (characterId) => {
 	      		setIsLoading(false);
 	        	setFetchedData(result ? result : new Error('Failed for reasons'));
       		})
-	      // .then(data => {
-	      //   setIsLoading(false);
-	      // })
 	      .catch(err => {
 	        console.log(err);
 	        setIsLoading(false);
