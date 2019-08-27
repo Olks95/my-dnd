@@ -21,6 +21,14 @@ export const useHandbook = (url) => {
 	// let headers = new Headers();
 	// headers.append('Accept', 'application/json');
 
+	function sleep(milliseconds) {
+	  var start = new Date().getTime();
+	  for (var i = 0; i < 1e7; i++) {
+	    if ((new Date().getTime() - start) > milliseconds){
+	      break;
+	    }
+	  }
+	}
 
 	console.log(url)
 
@@ -40,6 +48,7 @@ export const useHandbook = (url) => {
 		};
 
 	useEffect(() => {
+		sleep(5000)
 		fetchData();
 	}, []);
 	return [ data, error, isLoading ];
