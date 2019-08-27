@@ -1,13 +1,20 @@
 import React from 'react';
 import './Playground.css';
-import { Player } from '../ContentSelector/ContentSelector.js';
+import { Player, Spellbook, WorldMap } from '../ContentSelector/ContentSelector.js';
+
 
 const components = {
-	player: Player
+	player: Player,
+	spellbook: Spellbook,
+	worldmap: WorldMap
 }
 
+const query = 'Aid';
+
 const Playground = (props) => {
-	const Content = components['player'];
+	const ElementOne = components['player'];
+	const ElementTwo = components['spellbook'];
+	const ElementThree = components['worldmap'];
 	return(
 		<React.Fragment>
 	        <h1>You are a {props.playgroundType}!</h1>
@@ -24,14 +31,39 @@ const Playground = (props) => {
 	        			))}
 	        		</select>
 	        		<div className="content">
-		        		<Content characters={props.characters} selectedChar={props.selectedChar} />
+		        		<ElementOne characters={props.characters} selectedChar={props.selectedChar} selectedResource={props.selectedResource} />
 	        		</div>
 	        	</div>
 	        	<div className="flex-item">
-	        		Second Element
+	        	<select 
+	        			onChange={props.onCharSelect}
+	        			value={props.selectedChar}
+	        		>
+	        		{props.characters.map(char => (
+	        			<option key={char.id} value={char.id}>
+	        		    	{char.name}
+	        			</option>
+	        			))}
+	        		</select>
+	        		<div>
+	        			<ElementTwo selectedChar={props.selectedChar} selectedResource={props.selectedResource} query={query} />
+	        		</div>
+	        	
 	        	</div>
 	        	<div className="flex-item">
-	        		Third Element
+	        	<select 
+	        			onChange={props.onCharSelect}
+	        			value={props.selectedChar}
+	        		>
+	        		{props.characters.map(char => (
+	        			<option key={char.id} value={char.id}>
+	        		    	{char.name}
+	        			</option>
+	        			))}
+	        		</select>
+	        		<div>
+		        		<ElementThree characters={props.characters} selectedChar={props.selectedChar} />
+	        		</div>
 	        	</div>
 	        </div>
 	        <button onClick={props.onReturn} value='' >Return</button>
@@ -39,4 +71,4 @@ const Playground = (props) => {
 	)
 }
 
-export default Playground;
+export default React.memo(Playground);

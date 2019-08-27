@@ -18,6 +18,9 @@ const Character = props => {
       <p>
         <img src={props.imgUrl} alt="Not found."/>
       </p>
+      <p>
+        {props.description}
+      </p>
     </div>
   );
 };

@@ -20,7 +20,13 @@ const App = () => {
       name: 'Draud'
     }
   ]);
+  const [ handbookResources, setHandbookResources ] = useState([
+      'spells',
+      'equipment',
+      'proficiencies'
+    ])
   const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');
+  const [ selectedResource, setSelectedResource ] = useState('spells');
 
   const userTypeSelectHandler = (event) => {
     const selectedType = event.target.value;
@@ -30,6 +36,11 @@ const App = () => {
   const addCharacterHandler = (characterId, characterName) => {
     const newCharacterList = [...characterList, { id: characterId, name: characterName }];
     setCharacterList(newCharacterList);
+  }
+  
+  const selectResourceHandler = (event) => {
+    const resource = event.target.value;
+    setHandbookResources(resource);
   }
 
   const selectCharacterHandler = (event) => {
@@ -50,7 +61,10 @@ const App = () => {
         onNewCharacter={addCharacterHandler} 
         characters={characterList}
         selectedChar={selectedCharacter} 
-        onCharSelect={selectCharacterHandler} />
+        onCharSelect={selectCharacterHandler}
+        handbookResources={handbookResources}
+        selectedResource={selectedResource}
+        onResourceSelect={selectResourceHandler} />
       </div>
   )};
   return content;

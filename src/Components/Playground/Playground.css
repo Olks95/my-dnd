@@ -11,10 +11,15 @@
   min-width: 10rem;
   min-height: 10rem;
   border: solid black 1px;
+  background-color: white;
 }
 
 .content {
 	margin-top: 0.3rem;
+}
+
+p {
+    white-space: pre-wrap;
 }
 
 /* With a flex-basis of 28% there will be more than enough space for 3 items per line, but never enough for 4. */
