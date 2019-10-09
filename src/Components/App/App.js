@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 //import usePlayground from '../../Hooks/usePlayground.js';
-import WelcomeScreen from '../WelcomeScreen/WelcomeScreen.js';
-import Playground from '../Playground/Playground.js';
+import WelcomeScreen from '../WelcomeScreen';
+import Playground from '../Playground';
 
 const App = () => {
   const [ userType, setUserType ] = useState('');

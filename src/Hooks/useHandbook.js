@@ -1,55 +1,65 @@
 import { useState, useEffect } from 'react';
 
-export const useHandbook = (url) => {
+export const useHandbook = (category, query) => {
 	const [ isLoading, setIsLoading ] = useState(false);
 	const [ error, setError ] = useState(null);
 	const [ data, setData ] = useState(null);
-	// const [ url, setUrl ] = useState("https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api/")
 
-	// if(query) {
-	// 	const newQuery = [];
-	// 	const splitQuery = query.split(' ');
-	// 	splitQuery.forEach(word => {
-	// 		const upper = word.charAt(0).toUpperCase() + word.substring(1);
-	// 		newQuery.push(upper);
-	// 	})
-	// 	setUrl(url + category + "/?name=" + newQuery);
-	// } else {
-	// 	setUrl(url + category);
-	// }
-
-	// let headers = new Headers();
-	// headers.append('Accept', 'application/json');
-
-	function sleep(milliseconds) {
-	  var start = new Date().getTime();
-	  for (var i = 0; i < 1e7; i++) {
-	    if ((new Date().getTime() - start) > milliseconds){
-	      break;
-	    }
-	  }
+	const getQuery = () => {
+		let newUrl = '';
+		if(query) {
+			const newQuery = [];
+			const splitQuery = query.split(' ');
+			splitQuery.forEach(word => {
+				const upper = word.charAt(0).toUpperCase() + word.substring(1);
+				newQuery.push(upper);
+			});
+			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api/' + category + '/?name=' + newQuery.join('+');
+		} else {
+			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api' + category;
+		}
+		return newUrl;
 	}
 
-	console.log(url)
+	let headers = new Headers();
+	headers.append('Accept', 'application/json');
 
-		const fetchData = async () => {
+		const fetchData = (url) => {
 			setIsLoading(true);
-			try {
-				const res = await fetch(url, {
-					method: "GET",
-					mode: 'cors'
-				});
-				const json = await res.json();
-				setData(json);
+			fetch(url, {
+				method: "GET",
+				headers: headers,
+				mode: 'cors'
+			})
+			.then(response => response.json())
+			.then(data => {
+				if(data.count === 1) {
+					fetch('https://cors-anywhere.herokuapp.com/' + data.results[0]['url'], {
+	      				method: "GET",
+	      				headers: headers,
+	      				mode: 'cors'
+	      			})
+	      			.then(response => response.json())
+	      			.then(data => {
+	      				setIsLoading(false);
+	      				setData(data);
+	      			})
+	      			.catch(error => {
+	      				console.log('2: ' + error);
+	      				setIsLoading(false);
+	      				setError(error);
+	      			})
+				}
+			})
+			.catch(error => {
+				console.log('1: ' + error);
 				setIsLoading(false);
-			} catch(error) {
 				setError(error);
-			}
+			})
 		};
 
 	useEffect(() => {
-		sleep(5000)
-		fetchData();
+		fetchData(getQuery());
 	}, []);
 	return [ data, error, isLoading ];
 };

@@ -16,7 +16,6 @@ export const useDicecloud = (characterId) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-
 		const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 		let headers = new Headers();
 		headers.append('Accept', 'application/json');

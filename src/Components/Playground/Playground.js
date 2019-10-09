@@ -1,6 +1,6 @@
 import React from 'react';
 import './Playground.css';
-import { Player, Spellbook, WorldMap } from '../ContentSelector/ContentSelector.js';
+import { Player, Spellbook, WorldMap } from '../ContentSelector';
 
 
 const components = {
@@ -36,14 +36,10 @@ const Playground = (props) => {
 	        	</div>
 	        	<div className="flex-item">
 	        	<select 
-	        			onChange={props.onCharSelect}
-	        			value={props.selectedChar}
+	        			// onChange={props.onCharSelect}
+	        			// value={props.selectedChar}
 	        		>
-	        		{props.characters.map(char => (
-	        			<option key={char.id} value={char.id}>
-	        		    	{char.name}
-	        			</option>
-	        			))}
+	        		<option>Coming Soon...</option>
 	        		</select>
 	        		<div>
 	        			<ElementTwo selectedChar={props.selectedChar} selectedResource={props.selectedResource} query={query} />
@@ -52,14 +48,10 @@ const Playground = (props) => {
 	        	</div>
 	        	<div className="flex-item">
 	        	<select 
-	        			onChange={props.onCharSelect}
-	        			value={props.selectedChar}
+	        			// onChange={props.onCharSelect}
+	        			// value={props.selectedChar}
 	        		>
-	        		{props.characters.map(char => (
-	        			<option key={char.id} value={char.id}>
-	        		    	{char.name}
-	        			</option>
-	        			))}
+	        		<option>Coming Soon...</option>
 	        		</select>
 	        		<div>
 		        		<ElementThree characters={props.characters} selectedChar={props.selectedChar} />
@@ -71,4 +63,4 @@ const Playground = (props) => {
 	)
 }
 
-export default React.memo(Playground);
+export default Playground;
