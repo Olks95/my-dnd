@@ -3,6 +3,7 @@ import { useDicecloud } from '../../Hooks/useDicecloud';
 // import { usePlayersHandbook } from '../../Hooks/usePlayersHandbook';
 import { useHandbook } from '../../Hooks/useHandbook';
 import { RenderSpellbook } from '../RenderSpellbook';
+import { RenderMap } from '../RenderMap';
 
 import Character from '../Character';
 
@@ -60,13 +61,9 @@ export const Spellbook = (props) => {
 }
 
 export const WorldMap = (props) => {
-  	let content = <p>Loading characters...</p>;	
-
-		content = (
-			<React.Fragment>
-				<h1> WorldMap coming soon...</h1>
-
-			</React.Fragment>
-		)
-	return content;
+	return (
+		<React.Fragment>
+			<RenderMap maps={props.maps} selectedMap={props.selectedMap} />
+		</React.Fragment>
+	)
 }

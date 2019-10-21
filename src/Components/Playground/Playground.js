@@ -31,30 +31,38 @@ const Playground = (props) => {
 	        			))}
 	        		</select>
 	        		<div className="content">
-		        		<ElementOne characters={props.characters} selectedChar={props.selectedChar} selectedResource={props.selectedResource} />
+		        		<ElementOne selectedChar={props.selectedChar} />
 	        		</div>
 	        	</div>
 	        	<div className="flex-item">
-	        	<select 
-	        			// onChange={props.onCharSelect}
-	        			// value={props.selectedChar}
+	        		<select 
+	        			onChange={props.onResourceSelect}
+	        			value={props.selectedResource}
 	        		>
-	        		<option>Coming Soon...</option>
+	        		{props.resources.map(res => (
+	        			<option key={res} value={res} >
+	        				{res}
+	        			</option>
+	        			))}
 	        		</select>
 	        		<div>
-	        			<ElementTwo selectedChar={props.selectedChar} selectedResource={props.selectedResource} query={query} />
+	        			<ElementTwo selectedResource={props.selectedResource} query={query} />
 	        		</div>
 	        	
 	        	</div>
 	        	<div className="flex-item">
-	        	<select 
-	        			// onChange={props.onCharSelect}
-	        			// value={props.selectedChar}
+	        		<select 
+	        			onChange={props.onMapSelect}
+	        			value={props.selectedMap}
 	        		>
-	        		<option>Coming Soon...</option>
+	        		{props.maps.map(map => (
+	        			<option key={map.id} value={map.id} >
+	        				{map.name}
+	        			</option>
+	        			))}
 	        		</select>
 	        		<div>
-		        		<ElementThree characters={props.characters} selectedChar={props.selectedChar} />
+		        		<ElementThree maps={props.maps} selectedMap={props.selectedMap} />
 	        		</div>
 	        	</div>
 	        </div>

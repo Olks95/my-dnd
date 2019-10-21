@@ -19,7 +19,11 @@
   color: #1a1a1a;
 }
 
-img {
-	max-height: 100%;
+.portrait {
+	max-height: 25rem;
 	max-width: 100%;
+  border: 40px solid red;
+  border-image: url(Untitled.png) 100 round;
+  margin: 20px;
+  max-width: 75%;
 }

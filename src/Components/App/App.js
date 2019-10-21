@@ -20,14 +20,44 @@ const App = () => {
       name: 'Draud'
     }
   ]);
-  const [ handbookResources, setHandbookResources ] = useState([
-      'spells',
-      'equipment',
-      'proficiencies'
-    ])
+  const [ resourceList, setResourceList ] = useState([
+    'Spells',
+    'Equipment',
+    'Proficiencies'
+    // {
+    //   id: 0,
+    //   name: 'Spells'
+    // },
+    // {
+    //   id: 1,
+    //   name: 'Equipment'
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Proficiencies'
+    // }
+  ]);
+  const [ mapList, setMapList ] = useState([
+    {
+      id: 0,
+      name: 'World Map',
+      src: '/WorldMap_small.jpg',
+      src_large: '/WorldMap.jpg',
+      alt: 'The world map of Miradonia',
+      desc: 'Miradonia consists of two main continents. It is populated by a variety of races and monsters. '
+    },
+    {
+      id: 1,
+      name: 'Regional Map',
+      src: '/RegionalMap_small.jpg',
+      src_large: '/RegionalMap.jpg',
+      alt: 'The region map of Mistwood',
+      desc: ''
+    }
+  ]);
   const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');
-  const [ selectedResource, setSelectedResource ] = useState('spells');
-
+  const [ selectedResource, setSelectedResource ] = useState('Spells');
+  const [ selectedMap, setSelectedMap ] = useState(0);
   const userTypeSelectHandler = (event) => {
     const selectedType = event.target.value;
     setUserType(selectedType);
@@ -40,12 +70,17 @@ const App = () => {
   
   const selectResourceHandler = (event) => {
     const resource = event.target.value;
-    setHandbookResources(resource);
+    setSelectedResource(resource);
   }
 
   const selectCharacterHandler = (event) => {
     const charId = event.target.value;
     setSelectedCharacter(charId);
+  }
+
+  const selectMapHandler = (event) => {
+    const mapId = event.target.value;
+    setSelectedMap(mapId);
   }
 
   let content = (
@@ -62,9 +97,13 @@ const App = () => {
         characters={characterList}
         selectedChar={selectedCharacter} 
         onCharSelect={selectCharacterHandler}
-        handbookResources={handbookResources}
+        resources={resourceList}
         selectedResource={selectedResource}
-        onResourceSelect={selectResourceHandler} />
+        onResourceSelect={selectResourceHandler}
+        maps={mapList}
+        selectedMap={selectedMap}
+        onMapSelect={selectMapHandler}
+         />
       </div>
   )};
   return content;

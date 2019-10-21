@@ -16,7 +16,7 @@ const Character = props => {
         {props.dndClass[0]} level {props.dndClass[1]}
       </p>
       <p>
-        <img src={props.imgUrl} alt="Not found."/>
+        <img className="portrait" src={props.imgUrl} alt="Not found."/>
       </p>
       <p>
         {props.description}
