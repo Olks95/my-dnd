@@ -9,8 +9,8 @@ const mapStyle = {
 	maxWidth: "90%"
 }
 
-const xOffset = -25;
-const yOffset = -20;
+const xOffset = -35;
+const yOffset = -35;
 
 export const RenderMap = (props) => {
 	return (
@@ -29,4 +29,3 @@ export const RenderMap = (props) => {
 		</>
 	)
 }
-				// <img src={props.maps[props.selectedMap].src} alt={props.maps[props.selectedMap].alt} style={mapStyle} id="myMap" />
