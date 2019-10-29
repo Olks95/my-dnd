@@ -6,6 +6,7 @@ import { RenderSpellbook } from '../RenderSpellbook';
 import { RenderMap } from '../RenderMap';
 
 import Character from '../Character';
+import './ContentSelector.css';
 
 export const Player = (props) => {
 	const [ isLoading, fetchedData ] = useDicecloud(props.selectedChar);
@@ -44,14 +45,16 @@ export const Player = (props) => {
 }
 
 export const Spellbook = (props) => {
-	const [ fetchedData, error, isLoading ] = useHandbook('spells','Aid');
+	const [ fetchedData, error, isLoading ] = useHandbook(props.selectedResource, props.query);
 
-  	let content = <p>Loading spells...</p>;
+  	let content = <p>Loading {props.selectedResource}</p>;
   	if(!isLoading && fetchedData && !error) {
   		content = (
 			<React.Fragment>
-				<h1> Spellbook coming soon...</h1>
-				<RenderSpellbook />
+				<RenderSpellbook 
+					selectedResource={props.selectedResource}
+					data={fetchedData}
+				/>
 			</React.Fragment>
 		)
 	} else if(error) {

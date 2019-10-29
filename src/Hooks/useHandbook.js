@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 export const useHandbook = (category, query) => {
 	const [ isLoading, setIsLoading ] = useState(false);
 	const [ error, setError ] = useState(null);
-	const [ data, setData ] = useState(null);
+	const [ queryResult, setQueryResult ] = useState(null);
 
 	const getQuery = () => {
 		let newUrl = '';
@@ -16,7 +16,7 @@ export const useHandbook = (category, query) => {
 			});
 			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api/' + category + '/?name=' + newQuery.join('+');
 		} else {
-			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api' + category;
+			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api/' + category;
 		}
 		return newUrl;
 	}
@@ -42,13 +42,20 @@ export const useHandbook = (category, query) => {
 	      			.then(response => response.json())
 	      			.then(data => {
 	      				setIsLoading(false);
-	      				setData(data);
+	      				setQueryResult(data);
 	      			})
 	      			.catch(error => {
 	      				console.log('2: ' + error);
 	      				setIsLoading(false);
 	      				setError(error);
 	      			})
+				} else if(data.count === 0) {
+					console.log('Nothing found. Make sure you use the right resource')
+					setIsLoading(false);
+				} else {
+					console.log('More than 1 result... To be dealt with in future version.')
+					setIsLoading(false);
+					setQueryResult(data);
 				}
 			})
 			.catch(error => {
@@ -60,6 +67,6 @@ export const useHandbook = (category, query) => {
 
 	useEffect(() => {
 		fetchData(getQuery());
-	}, []);
-	return [ data, error, isLoading ];
+	}, [category, query]);
+	return [ queryResult, error, isLoading ];
 };

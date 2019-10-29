@@ -1,5 +1,4 @@
 import React from 'react';
-import './RenderMap.css';
 import { GlassMagnifier } from "react-image-magnifiers";
 
 const mapStyle = {

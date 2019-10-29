@@ -1,6 +1,7 @@
 import React from 'react';
 import './Playground.css';
 import { Player, Spellbook, WorldMap } from '../ContentSelector';
+import useForm from 'react-hook-form';
 
 
 const components = {
@@ -9,12 +10,21 @@ const components = {
 	worldmap: WorldMap
 }
 
-const query = 'Aid';
+// const query = 'Aid';
 
 const Playground = (props) => {
 	const ElementOne = components['player'];
 	const ElementTwo = components['spellbook'];
 	const ElementThree = components['worldmap'];
+
+// 	Initiating useForm and testing submit using console log
+	const { register, handleSubmit } = useForm();
+	const onSubmit = data => {
+		console.log(data);
+		props.onResourceSelect(data.resource);
+		props.onQuery(data.query);
+	}
+
 	return(
 		<React.Fragment>
 	        <h1>You are a {props.playgroundType}!</h1>
@@ -35,18 +45,25 @@ const Playground = (props) => {
 	        		</div>
 	        	</div>
 	        	<div className="flex-item">
-	        		<select 
-	        			onChange={props.onResourceSelect}
-	        			value={props.selectedResource}
-	        		>
-	        		{props.resources.map(res => (
-	        			<option key={res} value={res} >
-	        				{res}
-	        			</option>
-	        			))}
-	        		</select>
+
+{/*Using the react-hook-form instead of normal form have the react state be the "single source of truth" */}
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<h2>Choose the resource you want to search for:</h2>
+						<select name="resource" ref={register}>
+							{props.resources.map(res => (
+								<option key={res} value={res} >
+									{res}
+								</option>
+							))}
+						</select>
+						<div>
+							<span>Search word: </span>
+							<input type="text" name="query" placeholder="Fireball" ref={register} />
+						</div>
+							<input type="submit" value="Search" />
+					</form>
 	        		<div>
-	        			<ElementTwo selectedResource={props.selectedResource} query={query} />
+	        			<ElementTwo selectedResource={props.selectedResource} query={props.query} />
 	        		</div>
 	        	
 	        	</div>

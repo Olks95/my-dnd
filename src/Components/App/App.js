@@ -41,22 +41,23 @@ const App = () => {
     {
       id: 0,
       name: 'World Map',
-      src: '/WorldMap_small.jpg',
-      src_large: '/WorldMap.jpg',
+      src: '/WorldMap.jpg',
+      src_large: '/WorldMap_large.jpg',
       alt: 'The world map of Miradonia',
       desc: 'Miradonia consists of two main continents. It is populated by a variety of races and monsters. '
     },
     {
       id: 1,
       name: 'Regional Map',
-      src: '/RegionalMap_small.jpg',
-      src_large: '/RegionalMap.jpg',
+      src: '/RegionalMap.jpg',
+      src_large: '/RegionalMap_large.jpg',
       alt: 'The region map of Mistwood',
       desc: ''
     }
   ]);
   const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');
   const [ selectedResource, setSelectedResource ] = useState('Spells');
+  const [ query, setQuery ] = useState('Mending');
   const [ selectedMap, setSelectedMap ] = useState(0);
   const userTypeSelectHandler = (event) => {
     const selectedType = event.target.value;
@@ -68,9 +69,8 @@ const App = () => {
     setCharacterList(newCharacterList);
   }
   
-  const selectResourceHandler = (event) => {
-    const resource = event.target.value;
-    setSelectedResource(resource);
+  const selectResourceHandler = (newResource) => {
+    setSelectedResource(newResource);
   }
 
   const selectCharacterHandler = (event) => {
@@ -81,6 +81,10 @@ const App = () => {
   const selectMapHandler = (event) => {
     const mapId = event.target.value;
     setSelectedMap(mapId);
+  }
+
+  const handleQuery = (newQuery) => {
+    setQuery(newQuery);
   }
 
   let content = (
@@ -103,7 +107,9 @@ const App = () => {
         maps={mapList}
         selectedMap={selectedMap}
         onMapSelect={selectMapHandler}
-         />
+        query={query}
+        onQuery={handleQuery}
+         />  
       </div>
   )};
   return content;
