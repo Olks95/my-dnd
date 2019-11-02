@@ -1,29 +1,48 @@
 import React from 'react';
 import { GlassMagnifier } from "react-image-magnifiers";
+import './RenderMap.css';
 
-const mapStyle = {
-	border: "35px solid red",
+let mapStyle = {};
+
+mapStyle = {
+	border: "20px solid red",
 	borderImage: "url(mapBorder.png) 38 round",
-	margin: "20px",
+	marginTop: "20px",
 	maxWidth: "90%"
 }
 
 const xOffset = -35;
 const yOffset = -35;
 
+let largeImageSrc = "";
+
+const checkImage = src => {
+	let img = new Image();
+	img.onload = () => largeImageSrc = src;
+	img.onerror = () => largeImageSrc = ""; // if image does not exist, set largeImageSrc to default value
+
+	img.src = src; // starts loading of image
+}
+
+// const toggleBorder = () => {
+// 	if()
+// }
+
 export const RenderMap = (props) => {
+	largeImageSrc= ""; //Reset src to avoid 'magnifying' with the wrong large image
+	checkImage(props.maps[props.selectedMap].src_large);
 	return (
 		<>
-			<h1>This is the {props.maps[props.selectedMap].name} </h1>
 			<div className="img-magnifier-container" >
 				<GlassMagnifier
 					imageSrc={props.maps[props.selectedMap].src}
-					largeImageSrc= {props.maps[props.selectedMap].src_large}
+					largeImageSrc= {largeImageSrc}
 					imageAlt={props.maps[props.selectedMap].alt} 
 					style={mapStyle}
 					magnifierOffsetX={xOffset}
 					magnifierOffsetY={yOffset}
 				/>
+				<span><input type="checkbox" value="Border" /></span>
 			</div>
 		</>
 	)

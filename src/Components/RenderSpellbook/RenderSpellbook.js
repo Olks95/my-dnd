@@ -1,5 +1,6 @@
 import React from 'react';
 // import { useQueryHandler } from '../../Hooks/useQueryHandler';
+import './RenderSpellbook.css';
 
 export const RenderSpellbook = props => {
 	// const [ not sure yet ] = useQueryHandler[props.selectedResource, props.data]
@@ -8,14 +9,14 @@ export const RenderSpellbook = props => {
 	let spellLevel = null;
 	if (props.data.higher_level) {
 		spellExtra = (
-			<div className="spellMoreText" >
+			<div className="higher-level" >
 				<h1>Higher Levels</h1>
 				<hr/>
-				<p>{props.data.higher_level}</p>
+				{props.data.higher_level.map(paragraph => <p className="spell-text" key={props.data.desc.indexOf(paragraph)}>{paragraph.replace(/â€™/gi, "'")}</p>)}
 			</div>
 		)
 	} else {
-		spellExtra = <hr/>
+		spellExtra = null;
 	}
 	if (props.data.level <= 0) {
 		spellLevel = "Cantrip"
@@ -26,12 +27,11 @@ export const RenderSpellbook = props => {
 	if(props.data.index && props.selectedResource === "Spells") {
 		render = (
 			<React.Fragment>
-				<h1>Here is the {props.selectedResource} you searched for:</h1>
-				<div className="cardHolder">
-					<div className="queryCard">
-						<h1 className="spellName">{props.data.name}</h1>
-						<p className="spellUnderTitle">{props.data.school.name} {spellLevel}</p>
-						<div className="spellStats" >
+				<div className="card-holder">
+					<div className="query-card">
+						<h1 className="spell-name">{props.data.name}</h1>
+						<p className="spell-school">{props.data.school.name}   {spellLevel}</p>
+						<div className="spell-stats" >
 							<p>
 								<b>Casting Time:</b> {props.data.casting_time}
 							</p>
@@ -48,8 +48,8 @@ export const RenderSpellbook = props => {
 								<b>Classes:</b> {props.data.classes.map(element => element.name).join(', ')}
 							</p>
 						</div>
-						<div className="spellText" >
-							{props.data.desc.map(paragraph => <p key={props.data.desc.indexOf(paragraph)}>{paragraph.replace("â€™", "'")}</p>)}
+						<div className="spell-text" >
+							{props.data.desc.map(paragraph => <p key={props.data.desc.indexOf(paragraph)}>{paragraph.replace(/â€™/gi, "'")}</p>)}
 						</div>
 						{spellExtra}
 					</div> 

@@ -20,7 +20,7 @@ const Playground = (props) => {
 // 	Initiating useForm and testing submit using console log
 	const { register, handleSubmit } = useForm();
 	const onSubmit = data => {
-		console.log(data);
+		// console.log(data);
 		props.onResourceSelect(data.resource);
 		props.onQuery(data.query);
 	}
@@ -30,26 +30,32 @@ const Playground = (props) => {
 	        <h1>You are a {props.playgroundType}!</h1>
 	        <div className="container" >
 	        	<div className="flex-item">
-	        		<select 
-	        			onChange={props.onCharSelect}
-	        			value={props.selectedChar}
-	        		>
-	        		{props.characters.map(char => (
-	        			<option key={char.id} value={char.id}>
-	        		    	{char.name}
-	        			</option>
-	        			))}
-	        		</select>
-	        		<div className="content">
+	        		<div className="flex-item-header">
+		        		<select 
+		        			onChange={props.onCharSelect}
+		        			value={props.selectedChar}
+		        			className="select-css"
+		        		>
+		        		{props.characters.map(char => (
+		        			<option key={char.id} value={char.id}>
+		        		    	{char.name}
+		        			</option>
+		        			))}
+		        		</select>
+	        		</div>
+	        		<div className="characterContainer">
 		        		<ElementOne selectedChar={props.selectedChar} />
 	        		</div>
 	        	</div>
 	        	<div className="flex-item">
+	        		<div className="flex-item-header">
 
 {/*Using the react-hook-form instead of normal form have the react state be the "single source of truth" */}
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<h2>Choose the resource you want to search for:</h2>
-						<select name="resource" ref={register}>
+						<select className="select-css" 
+							name="resource" 
+							ref={register}
+						>
 							{props.resources.map(res => (
 								<option key={res} value={res} >
 									{res}
@@ -57,20 +63,22 @@ const Playground = (props) => {
 							))}
 						</select>
 						<div>
-							<span>Search word: </span>
-							<input type="text" name="query" placeholder="Fireball" ref={register} />
+							<input className="search" type="input" name="query" placeholder="Eldritch Blast" ref={register} />
+							<input className="my-button" type="submit" value="Search" />
 						</div>
-							<input type="submit" value="Search" />
 					</form>
-	        		<div>
+	        		</div>
+	        		<div className="spellContainer">
 	        			<ElementTwo selectedResource={props.selectedResource} query={props.query} />
 	        		</div>
 	        	
 	        	</div>
 	        	<div className="flex-item">
+	        		<div className="flex-item-header">
 	        		<select 
 	        			onChange={props.onMapSelect}
 	        			value={props.selectedMap}
+	        			className="select-css"
 	        		>
 	        		{props.maps.map(map => (
 	        			<option key={map.id} value={map.id} >
@@ -78,7 +86,8 @@ const Playground = (props) => {
 	        			</option>
 	        			))}
 	        		</select>
-	        		<div>
+	        		</div>
+	        		<div className="mapContainer">
 		        		<ElementThree maps={props.maps} selectedMap={props.selectedMap} />
 	        		</div>
 	        	</div>

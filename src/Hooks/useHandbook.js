@@ -24,49 +24,49 @@ export const useHandbook = (category, query) => {
 	let headers = new Headers();
 	headers.append('Accept', 'application/json');
 
-		const fetchData = (url) => {
-			setIsLoading(true);
-			fetch(url, {
-				method: "GET",
-				headers: headers,
-				mode: 'cors'
-			})
-			.then(response => response.json())
-			.then(data => {
-				if(data.count === 1) {
-					fetch('https://cors-anywhere.herokuapp.com/' + data.results[0]['url'], {
-	      				method: "GET",
-	      				headers: headers,
-	      				mode: 'cors'
-	      			})
-	      			.then(response => response.json())
-	      			.then(data => {
-	      				setIsLoading(false);
-	      				setQueryResult(data);
-	      			})
-	      			.catch(error => {
-	      				console.log('2: ' + error);
-	      				setIsLoading(false);
-	      				setError(error);
-	      			})
-				} else if(data.count === 0) {
-					console.log('Nothing found. Make sure you use the right resource')
-					setIsLoading(false);
-				} else {
-					console.log('More than 1 result... To be dealt with in future version.')
-					setIsLoading(false);
+	const fetchData = (url) => {
+		setIsLoading(true);
+		fetch(url, {
+			method: "GET",
+			headers: headers,
+			mode: 'cors'
+		})
+		.then(response => response.json())
+		.then(data => {
+			if(data.count === 1) {
+				fetch('https://cors-anywhere.herokuapp.com/' + data.results[0]['url'], {
+      				method: "GET",
+      				headers: headers,
+      				mode: 'cors'
+      			})
+      			.then(response => response.json())
+      			.then(data => {
+      				setIsLoading(false);
 					setQueryResult(data);
-				}
-			})
-			.catch(error => {
-				console.log('1: ' + error);
+      			})
+      			.catch(error => {
+      				console.log('2: ' + error);
+      				setIsLoading(false);
+      				setError(error);
+      			})
+			} else if(data.count === 0) {
+				console.log('Nothing found. Make sure you use the right resource')
 				setIsLoading(false);
-				setError(error);
-			})
-		};
+			} else {
+				console.log('More than 1 result... To be dealt with in future version.')
+				setIsLoading(false);
+				setQueryResult(data);
+			}
+		})
+		.catch(error => {
+			console.log('1: ' + error);
+			setIsLoading(false);
+			setError(error);
+		})
+	};
 
 	useEffect(() => {
-		fetchData(getQuery());
+		fetchData(getQuery())
 	}, [category, query]);
 	return [ queryResult, error, isLoading ];
 };

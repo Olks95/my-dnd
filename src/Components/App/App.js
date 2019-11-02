@@ -24,18 +24,6 @@ const App = () => {
     'Spells',
     'Equipment',
     'Proficiencies'
-    // {
-    //   id: 0,
-    //   name: 'Spells'
-    // },
-    // {
-    //   id: 1,
-    //   name: 'Equipment'
-    // },
-    // {
-    //   id: 2,
-    //   name: 'Proficiencies'
-    // }
   ]);
   const [ mapList, setMapList ] = useState([
     {
@@ -57,12 +45,17 @@ const App = () => {
   ]);
   const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');
   const [ selectedResource, setSelectedResource ] = useState('Spells');
-  const [ query, setQuery ] = useState('Mending');
+  const [ query, setQuery ] = useState('Eldritch Blast');
   const [ selectedMap, setSelectedMap ] = useState(0);
   const userTypeSelectHandler = (event) => {
     const selectedType = event.target.value;
     setUserType(selectedType);
   };
+
+  const selectCharacterHandler = (event) => {
+    const charId = event.target.value;
+    setSelectedCharacter(charId);
+  }
 
   const addCharacterHandler = (characterId, characterName) => {
     const newCharacterList = [...characterList, { id: characterId, name: characterName }];
@@ -73,14 +66,19 @@ const App = () => {
     setSelectedResource(newResource);
   }
 
-  const selectCharacterHandler = (event) => {
-    const charId = event.target.value;
-    setSelectedCharacter(charId);
+  const addResourceItem = (newResource) => {
+    const newResourceList = [...resourceList, newResource];
+    setResourceList(newResourceList);
   }
 
   const selectMapHandler = (event) => {
     const mapId = event.target.value;
     setSelectedMap(mapId);
+  }
+
+  const addMapItem = (newMap) => {
+    const newMapList = [...mapList, newMap];
+    setMapList(newMapList);
   }
 
   const handleQuery = (newQuery) => {
@@ -109,7 +107,9 @@ const App = () => {
         onMapSelect={selectMapHandler}
         query={query}
         onQuery={handleQuery}
-         />  
+        onNewResource={addResourceItem}
+        onNewMap={addMapItem}
+         />      
       </div>
   )};
   return content;
