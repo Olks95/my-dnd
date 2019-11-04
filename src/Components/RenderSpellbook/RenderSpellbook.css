@@ -1,19 +1,20 @@
-.card-holder {
-	max-width: 400px;
-	display: flex;
+.spell-card-holder {
+  max-width: 400px;
+  display: flex;
 }
-.query-card {
+.spell-card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
 	padding: 16px;
 	text-align: center;
 	background-color: #f1f1f1;
 	border: solid 1px black;
+	max-width: 400px;
 }
 
 .spell-name {
 	font-weight: bold;
 	font-family: "Lobster Two";
-	font-size: 1.75em;
+	font-size: 2em;
 	margin-bottom: 5px;
 }
 
@@ -28,7 +29,7 @@
 
 .spell-text {
 	font-family: Cookie, serif;
-	font-size: 1.25em;
+	font-size: 1.5em;
 	padding: 0 15px;
 }
 
@@ -36,6 +37,7 @@
 	font-weight: bold;
 	font-family: "Lobster Two", serif;
 	font-size: 1.75em;
+	margin-bottom: -0.1em;
 }
 
 .higher-level .spell-text {

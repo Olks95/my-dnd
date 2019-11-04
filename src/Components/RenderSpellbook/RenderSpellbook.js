@@ -27,8 +27,8 @@ export const RenderSpellbook = props => {
 	if(props.data.index && props.selectedResource === "Spells") {
 		render = (
 			<React.Fragment>
-				<div className="card-holder">
-					<div className="query-card">
+				<div className="spell-card-holder">
+					<div className="spell-card">
 						<h1 className="spell-name">{props.data.name}</h1>
 						<p className="spell-school">{props.data.school.name}   {spellLevel}</p>
 						<div className="spell-stats" >

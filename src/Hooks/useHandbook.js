@@ -28,8 +28,7 @@ export const useHandbook = (category, query) => {
 		setIsLoading(true);
 		fetch(url, {
 			method: "GET",
-			headers: headers,
-			mode: 'cors'
+			headers: headers
 		})
 		.then(response => response.json())
 		.then(data => {

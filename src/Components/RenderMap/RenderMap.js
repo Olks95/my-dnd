@@ -11,8 +11,8 @@ mapStyle = {
 	maxWidth: "90%"
 }
 
-const xOffset = -35;
-const yOffset = -35;
+const xOffset = -20;
+const yOffset = -20;
 
 let largeImageSrc = "";
 
@@ -24,8 +24,8 @@ const checkImage = src => {
 	img.src = src; // starts loading of image
 }
 
-// const toggleBorder = () => {
-// 	if()
+// const toggleBorder = (event) => {
+// 	
 // }
 
 export const RenderMap = (props) => {
@@ -42,7 +42,8 @@ export const RenderMap = (props) => {
 					magnifierOffsetX={xOffset}
 					magnifierOffsetY={yOffset}
 				/>
-				<span><input type="checkbox" value="Border" /></span>
+				<p className="map-description">{props.maps[props.selectedMap].desc}</p>
+				{/*<span><input type="button" onClick="toggleBorder()" value="Border" /></span>*/}
 			</div>
 		</>
 	)

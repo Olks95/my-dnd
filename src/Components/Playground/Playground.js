@@ -28,6 +28,7 @@ const Playground = (props) => {
 	return(
 		<React.Fragment>
 	        <h1>You are a {props.playgroundType}!</h1>
+	        <button onClick={props.onReturn} value='' >Return</button>
 	        <div className="container" >
 	        	<div className="flex-item">
 	        		<div className="flex-item-header">
@@ -63,7 +64,7 @@ const Playground = (props) => {
 							))}
 						</select>
 						<div>
-							<input className="search" type="input" name="query" placeholder="Eldritch Blast" ref={register} />
+							<input className="search" type="input" name="query" placeholder="Spell Name" ref={register} />
 							<input className="my-button" type="submit" value="Search" />
 						</div>
 					</form>
