@@ -1,23 +1,15 @@
 import React from 'react';
 import { useDicecloud } from '../../Hooks/useDicecloud';
+// import { usePlayersHandbook } from '../../Hooks/usePlayersHandbook';
+import { useHandbook } from '../../Hooks/useHandbook';
+import { RenderSpellbook } from '../RenderSpellbook';
+import { RenderMap } from '../RenderMap';
 
-import Character from '../Character/Character.js';
+import Character from '../Character';
+import './ContentSelector.css';
 
 export const Player = (props) => {
 	const [ isLoading, fetchedData ] = useDicecloud(props.selectedChar);
-  	let loadedCharacter = null;
-
-	if(fetchedData) {
-		console.log(fetchedData[0].PictureURL)
-	    loadedCharacter = {
-	      name: fetchedData[0].Name,
-	      alignment: fetchedData[0].Alignment,
-	      race: fetchedData[0].Race,
-	      dndClass: fetchedData[0].Class.split(" "),
-	      gender: fetchedData[0].Gender,
-	      imgUrl: fetchedData[0].PictureURL
-	    };
-	  }
 
   	let content = <p>Loading characters...</p>;
 	
@@ -25,15 +17,37 @@ export const Player = (props) => {
   		content = (
 			<React.Fragment>
 				<Character 
-					name={loadedCharacter.name}
-					alignment={loadedCharacter.alignment}
-					race={loadedCharacter.race}
-					dndClass={loadedCharacter.dndClass}
-					gender={loadedCharacter.gender}
-					imgUrl={loadedCharacter.imgUrl} />
+					data={fetchedData[0]}
+				/>
 			</React.Fragment>
 		)
   	}
+  	return content;
+}
 
+export const Spellbook = (props) => {
+	const [ fetchedData, error, isLoading ] = useHandbook(props.selectedResource, props.query);
+
+  	let content = <p>Loading {props.selectedResource}</p>;
+  	if(!isLoading && fetchedData && !error) {
+  		content = (
+			<React.Fragment>
+				<RenderSpellbook 
+					selectedResource={props.selectedResource}
+					data={fetchedData}
+				/>
+			</React.Fragment>
+		)
+	} else if(error) {
+		console.log(error)
+	}
 	return content;
+}
+
+export const WorldMap = (props) => {
+	return (
+		<React.Fragment>
+			<RenderMap maps={props.maps} selectedMap={props.selectedMap} />
+		</React.Fragment>
+	)
 }

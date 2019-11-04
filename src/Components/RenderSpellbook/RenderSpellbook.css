@@ -1,0 +1,68 @@
+.spell-card-holder {
+  max-width: 400px;
+  display: flex;
+}
+.spell-card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+	padding: 16px;
+	text-align: center;
+	background-color: #f1f1f1;
+	border: solid 1px black;
+	max-width: 400px;
+}
+
+.spell-name {
+	font-weight: bold;
+	font-family: "Lobster Two";
+	font-size: 2em;
+	margin-bottom: 5px;
+}
+
+.spell-school {
+	font-family: "Lakki Reddy", serif;
+	font-style: italic;
+}
+
+.spell-stats {
+	margin-bottom: 10px;
+}
+
+.spell-text {
+	font-family: Cookie, serif;
+	font-size: 1.5em;
+	padding: 0 15px;
+}
+
+.higher-level h1 {
+	font-weight: bold;
+	font-family: "Lobster Two", serif;
+	font-size: 1.75em;
+	margin-bottom: -0.1em;
+}
+
+.higher-level .spell-text {
+
+}
+
+hr {
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+    text-align: ;
+    margin-bottom: -20px;
+}
+hr:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+
+/* https://css-tricks.com/examples/hrs/ */
