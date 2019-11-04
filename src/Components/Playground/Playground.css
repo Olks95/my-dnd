@@ -1,3 +1,7 @@
+.main-header {
+/*potential header styles coming at some point*/
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -76,7 +80,7 @@
   background-size: .65em auto, 100%;
 }
 
-.search:focus {
+.search:focus, .my-button:focus {
   outline: 0;
 }
 
@@ -93,7 +97,7 @@ h1 {
 }
 
 .my-button:active {
-
+  box-shadow: 2px 2px 5px red;
 }
 
 .select-css {

@@ -40,7 +40,7 @@ const App = () => {
       src: '/RegionalMap.jpg',
       src_large: '/RegionalMap_large.jpg',
       alt: 'The region map of Mistwood',
-      desc: ''
+      desc: 'The region of Mistwood holds the main travel route between the north and south. The Mist Woods themselves are the homeland for many wood elves, while the Knife Edge Mountains is the home to some smaller groups of Dwarves. Elesgate is the capital of the region, being a natural stop for any who travel north-south. The Silver River connects Elesgate to Martslock which functions as the main port.'
     }
   ]);
   const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');

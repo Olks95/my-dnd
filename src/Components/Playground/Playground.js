@@ -24,11 +24,22 @@ const Playground = (props) => {
 		props.onResourceSelect(data.resource);
 		props.onQuery(data.query);
 	}
+	
+	let summary = null;
+		if(props.playgroundType === 'DM') {
+			summary = (
+			<option key="summary" value="summary">
+				Character Summary
+			</option>
+			)
+		} else summary = null;
 
 	return(
 		<React.Fragment>
-	        <h1>You are a {props.playgroundType}!</h1>
-	        <button onClick={props.onReturn} value='' >Return</button>
+			<div className="main-header">
+		        <h1>You are a {props.playgroundType}!</h1>
+		        <button onClick={props.onReturn} value='' >Return</button>
+			</div>
 	        <div className="container" >
 	        	<div className="flex-item">
 	        		<div className="flex-item-header">
@@ -42,6 +53,7 @@ const Playground = (props) => {
 		        		    	{char.name}
 		        			</option>
 		        			))}
+		        		{summary}
 		        		</select>
 	        		</div>
 	        		<div className="characterContainer">
