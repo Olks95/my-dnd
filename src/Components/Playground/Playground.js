@@ -1,6 +1,7 @@
 import React from 'react';
 import './Playground.css';
 import { Player, Spellbook, WorldMap } from '../ContentSelector';
+import { NewCharacterForm } from '../NewCharacterForm';
 import useForm from 'react-hook-form';
 
 
@@ -24,11 +25,13 @@ const Playground = (props) => {
 		props.onResourceSelect(data.resource);
 		props.onQuery(data.query);
 	}
-	
+
 	let summary = null;
+	let characterIds = null;
 		if(props.playgroundType === 'DM') {
+			characterIds = props.characters.map((character) => character.id);
 			summary = (
-			<option key="summary" value="summary">
+			<option key="summary" value={characterIds} data-array={true} >
 				Character Summary
 			</option>
 			)
@@ -45,11 +48,11 @@ const Playground = (props) => {
 	        		<div className="flex-item-header">
 		        		<select 
 		        			onChange={props.onCharSelect}
-		        			value={props.selectedChar}
+		        			data-value={props.selectedChar}
 		        			className="select-css"
 		        		>
 		        		{props.characters.map(char => (
-		        			<option key={char.id} value={char.id}>
+		        			<option key={char.id} value={char.id} data-array={false}>
 		        		    	{char.name}
 		        			</option>
 		        			))}
@@ -57,7 +60,10 @@ const Playground = (props) => {
 		        		</select>
 	        		</div>
 	        		<div className="characterContainer">
-		        		<ElementOne selectedChar={props.selectedChar} />
+		        		<ElementOne selectedChar={props.selectedChar} characters={props.characters} />
+	        		</div>
+	        		<div className="add-character">
+	        			<NewCharacterForm onNewCharacter={props.onNewCharacter} />
 	        		</div>
 	        	</div>
 	        	<div className="flex-item">

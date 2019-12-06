@@ -1,7 +1,8 @@
 import React from 'react';
-import { CharacterAbility, CharacterSaveOrSkill } from '../CharacterAbility';
+import { CharAbility, CharStat } from '../CharacterAbility';
 
-import './Character.css';
+// Moved to ContentSelector folder so that Summary can use the same class names/styles
+// import './Character.css';
 
 const portraitStyle = {
   border: "20px solid red",
@@ -48,23 +49,23 @@ const Character = props => {
             <div className="character-left">
               <div className="character-ability-scores">
                 {abilities.map(ability => (
-                  <CharacterAbility ability={ability} abilityMod={ability+"Mod"} data={props.data}  key={abilities.indexOf(ability)} />
+                  <CharAbility ability={ability} abilityMod={ability+"Mod"} data={props.data}  key={ability + ' ' + props.data.Name} />
                 ))}
               </div>
             </div>
             <div className="character-middle">
               <div className="character-saves">
               {abilities.map(ability => (
-                  <CharacterSaveOrSkill stat={ability+"Save"} statProficiency={ability+"SaveProficiency"} data={props.data}  key={"Save" + abilities.indexOf(ability)} />
+                  <CharStat stat={ability+"Save"} statProficiency={ability+"SaveProficiency"} data={props.data}  key={ability+"Save " + props.data.Name} />
                 ))}
               </div>
               <div className="character-skills">
               {skills.map(skill => (
-                  <CharacterSaveOrSkill stat={skill} statProficiency={skill+"Proficiency"} data={props.data}  key={"Skill" + skills.indexOf(skill)} />
+                  <CharStat stat={skill} statProficiency={skill+"Proficiency"} data={props.data}  key={skill + ' ' + props.data.Name} />
                 ))}
               </div>
               <div className="character-skills">
-                  <CharacterSaveOrSkill stat="passivePerception" statProficiency="PerceptionProficiency" data={props.data}  key="passivePerception" />
+                  <CharStat stat="passivePerception" statProficiency="PerceptionProficiency" data={props.data}  key={"passPerception " + props.data.Name} />
               </div>
             </div>
             <div className="character-right">

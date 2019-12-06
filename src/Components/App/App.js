@@ -9,14 +9,17 @@ const App = () => {
   const [ characterList, setCharacterList ] = useState([
     {
       id: 'mLdzKAN7AAGt3qPP2',
+      APIkey: 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t',
       name: 'Harley Merlin'
     },
     {
       id: 'siQfxrFNzgWHoQk39',
+      APIkey: 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t',
       name: 'Surina Kerrhylon'
     },
     {
       id: 'xS8JoRmvpsnjm529p',
+      APIkey: 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t',
       name: 'Draud'
     }
   ]);
@@ -43,7 +46,7 @@ const App = () => {
       desc: 'The region of Mistwood holds the main travel route between the north and south. The Mist Woods themselves are the homeland for many wood elves, while the Knife Edge Mountains is the home to some smaller groups of Dwarves. Elesgate is the capital of the region, being a natural stop for any who travel north-south. The Silver River connects Elesgate to Martslock which functions as the main port.'
     }
   ]);
-  const [ selectedCharacter, setSelectedCharacter ] = useState('mLdzKAN7AAGt3qPP2');
+  const [ selectedCharacter, setSelectedCharacter ] = useState(['mLdzKAN7AAGt3qPP2']);
   const [ selectedResource, setSelectedResource ] = useState('Spells');
   const [ query, setQuery ] = useState('Eldritch Blast');
   const [ selectedMap, setSelectedMap ] = useState(0);
@@ -53,22 +56,21 @@ const App = () => {
   };
 
   const selectCharacterHandler = (event) => {
-    const charId = event.target.value;
+    let charId = [];
+    charId = event.target.value.split(',')
     setSelectedCharacter(charId);
   }
 
-  const addCharacterHandler = (characterId, characterName) => {
-    const newCharacterList = [...characterList, { id: characterId, name: characterName }];
+  const addCharacterHandler = (characterUrl, apiKey, characterName) => {
+    const characterId = characterUrl.match(/character\/\w*\//g)[0].split('/')[1];
+    console.log(characterId, apiKey, characterName);
+    const newCharacterList = [...characterList, { id: characterId, apiKey: apiKey, name: characterName }];
     setCharacterList(newCharacterList);
+    setSelectedCharacter(characterId);
   }
   
   const selectResourceHandler = (newResource) => {
     setSelectedResource(newResource);
-  }
-
-  const addResourceItem = (newResource) => {
-    const newResourceList = [...resourceList, newResource];
-    setResourceList(newResourceList);
   }
 
   const selectMapHandler = (event) => {
@@ -76,10 +78,11 @@ const App = () => {
     setSelectedMap(mapId);
   }
 
-  const addMapItem = (newMap) => {
-    const newMapList = [...mapList, newMap];
-    setMapList(newMapList);
-  }
+// Not implemented at this time... Would be similar to addCharacterHandler.
+  // const addMapItem = (newMap) => {
+  //   const newMapList = [...mapList, newMap]; //newMap should be an object.
+  //   setMapList(newMapList);
+  // }
 
   const handleQuery = (newQuery) => {
     setQuery(newQuery);
@@ -107,17 +110,10 @@ const App = () => {
         onMapSelect={selectMapHandler}
         query={query}
         onQuery={handleQuery}
-        onNewResource={addResourceItem}
-        onNewMap={addMapItem}
+        // onNewMap={addMapItem}
          />      
       </div>
   )};
   return content;
 } 
 export default App;
-
-//All available character information can be fetched using the following url setup:
-//
-//characterId = 'mLdzKAN7AAGt3qPP2';
-//APIkey = 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t';
-//characterUrl = `https://dicecloud.com/vmix-character/${characterId}?key=${APIkey}`;

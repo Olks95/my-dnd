@@ -2,6 +2,14 @@
 /*potential header styles coming at some point*/
 }
 
+.character-summary {
+  margin-bottom: 2em;
+}
+
+.add-character {
+  margin-top: 2em;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -53,7 +61,7 @@
   min-width: 62px;
 }
 
-.search, .my-button {
+.search, .my-button, .search-element {
   display: inline-block;
   font-size: 0.8em;
   font-family: "Lobster Two", serif;
@@ -80,7 +88,7 @@
   background-size: .65em auto, 100%;
 }
 
-.search:focus, .my-button:focus {
+.search:focus, .my-button:focus, .search-element:focus {
   outline: 0;
 }
 

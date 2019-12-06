@@ -6,7 +6,10 @@ import { RenderSpellbook } from '../RenderSpellbook';
 import { RenderMap } from '../RenderMap';
 
 import Character from '../Character';
+import Summary from '../Summary';
 import './ContentSelector.css';
+import './Character.css';
+
 
 export const Player = (props) => {
 	const [ isLoading, fetchedData ] = useDicecloud(props.selectedChar);
@@ -14,13 +17,23 @@ export const Player = (props) => {
   	let content = <p>Loading characters...</p>;
 	
   	if(!isLoading && fetchedData && fetchedData.length > 0) {
+		// console.log(fetchedData.length);
+  		if(fetchedData.length > 1) {
+  		content = (
+			<React.Fragment>
+				<Summary 
+					data={fetchedData}
+				/>
+			</React.Fragment>
+		)} else {
   		content = (
 			<React.Fragment>
 				<Character 
-					data={fetchedData[0]}
+					data={fetchedData[0][0]}
 				/>
 			</React.Fragment>
 		)
+  	}
   	}
   	return content;
 }

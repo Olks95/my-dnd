@@ -3,47 +3,46 @@ import { useState, useEffect } from 'react';
 export const useDicecloud = (characterId) => {
 	
 	const [ isLoading, setIsLoading ] = useState(false);
-	const [ fetchedData, setFetchedData ] = useState(null);
+	const [ fetchedData, setFetchedData ] = useState([]);
 
 	// headers.append('Authorization', getToken());
 	// All available character information can be fetched using the following url setup:
 
 	// characterId = 'mLdzKAN7AAGt3qPP2';
+	let characterUrls = [];
 	const APIkey = 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t';
-	const characterUrl = `https://dicecloud.com/vmix-character/${characterId}?key=${APIkey}`;
-
-
+	if(Array.isArray(characterId)) {
+		characterUrls = characterId.map(charId => `https://dicecloud.com/vmix-character/${charId}?key=${APIkey}`);
+	} else {
+		characterUrls[0] = `https://dicecloud.com/vmix-character/${characterId}?key=${APIkey}`;
+	}
+	// console.log(characterUrls);
+	
+	const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+	let headers = new Headers();
+	headers.append('Accept', 'application/json');
 
 	useEffect(() => {
 		setIsLoading(true);
-		const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-		let headers = new Headers();
-		headers.append('Accept', 'application/json');
+		// console.log(characterUrls);
 
-		// console.log('Sending Http request for ' + characterUrl);
-	    fetch(proxyUrl + characterUrl, {
-	    	method: "GET",
-	    	headers: headers,
-	    	mode: 'cors'
-	    })
-	      .then(response => {
-	        if (!response.ok) {
-	          	console.log(response.status)
-	          	throw new Error('Failed to fetch.');
-	        }
-	        // console.log(response)
-	        return response.json()
-	      })
-	      .then(result => 
-      		{
+		Promise.all(characterUrls.map(url => {
+			// console.log('Sending Http request for ' + url);
+		    return fetch(proxyUrl + url, {
+		    	method: "GET",
+		    	headers: headers,
+		    	mode: 'cors'
+		    }).then(response => response.json())
+		})).then(results => {
 	      		setIsLoading(false);
-	        	setFetchedData(result ? result : new Error('Failed for reasons'));
+	      		// console.log(results)
+	        	setFetchedData(results ? results : new Error('Failed for reasons'));
       		})
 	      .catch(err => {
 	        console.log(err);
 	        setIsLoading(false);
 	      });
-	}, [ characterUrl, characterId ]);
+	}, [ characterId ]);
 
     return [ isLoading, fetchedData ];
 }
