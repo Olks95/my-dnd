@@ -43,7 +43,7 @@ const App = () => {
       src: '/RegionalMap.jpg',
       src_large: '/RegionalMap_large.jpg',
       alt: 'The region map of Mistwood',
-      desc: 'The region of Mistwood holds the main travel route between the north and south. The Mist Woods themselves are the homeland for many wood elves, while the Knife Edge Mountains is the home to some smaller groups of Dwarves. Elesgate is the capital of the region, being a natural stop for any who travel north-south. The Silver River connects Elesgate to Martslock which functions as the main port.'
+      desc: 'The region of Mistwood holds the main travel route between the north and south. The Mist Woods themselves are the homeland for many wood elves, while the Knife Edge Mountains is the home to some smaller groups of Dwarves. Elesgate is the capital of the region, being a natural stop for any who travel north-south. The Silver River connects Elesgate to Martslock which functions as the main port. Work in progress...'
     }
   ]);
   const [ selectedCharacter, setSelectedCharacter ] = useState(['mLdzKAN7AAGt3qPP2']);
@@ -67,6 +67,26 @@ const App = () => {
     const newCharacterList = [...characterList, { id: characterId, apiKey: apiKey, name: characterName }];
     setCharacterList(newCharacterList);
     setSelectedCharacter(characterId);
+  }
+
+  const removeCharacterHandler = (event) => {
+    if(event.target.value === "REMOVE-ALL") {
+      setCharacterList([]);
+      setSelectedCharacter([]);
+    } else {
+      const newCharacterList = characterList.filter(obj => obj.name !== event.target.value);
+      let updateSelectedCharacter = true;
+      if(selectedCharacter) {
+        const updateSelectedCharacter = !newCharacterList.some(obj => obj.id === selectedCharacter[0]);
+      }
+      setCharacterList(newCharacterList);
+      if(updateSelectedCharacter && newCharacterList.length > 0) {
+        setSelectedCharacter(newCharacterList[0].id);
+        console.log(newCharacterList);
+      } else {
+        setSelectedCharacter([]);
+      }
+    }
   }
   
   const selectResourceHandler = (newResource) => {
@@ -98,7 +118,8 @@ const App = () => {
         <Playground 
         playgroundType={userType} 
         onReturn={userTypeSelectHandler} 
-        onNewCharacter={addCharacterHandler} 
+        onNewCharacter={addCharacterHandler}
+        onRemoveCharacter={removeCharacterHandler}
         characters={characterList}
         selectedChar={selectedCharacter} 
         onCharSelect={selectCharacterHandler}

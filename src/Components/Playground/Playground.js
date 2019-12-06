@@ -56,14 +56,14 @@ const Playground = (props) => {
 		        		    	{char.name}
 		        			</option>
 		        			))}
-		        		{summary}
+		        			{summary}
 		        		</select>
 	        		</div>
 	        		<div className="characterContainer">
 		        		<ElementOne selectedChar={props.selectedChar} characters={props.characters} />
 	        		</div>
 	        		<div className="add-character">
-	        			<NewCharacterForm onNewCharacter={props.onNewCharacter} />
+	        			<NewCharacterForm onNewCharacter={props.onNewCharacter} onRemoveCharacter={props.onRemoveCharacter} characters={props.characters} />
 	        		</div>
 	        	</div>
 	        	<div className="flex-item">

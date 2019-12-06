@@ -16,7 +16,14 @@ export const Player = (props) => {
 
   	let content = <p>Loading characters...</p>;
 	
-  	if(!isLoading && fetchedData && fetchedData.length > 0) {
+  	if(props.characters.length === 0) {
+  		content = (
+  			<h1>Please add a character using the form below...</h1>)
+  	} else if (props.selectedChar === null) {
+  		content = (
+  			<h1>Please select a character above.</h1>
+  		)
+  	} else if(!isLoading && fetchedData && fetchedData.length > 0) {
 		// console.log(fetchedData.length);
   		if(fetchedData.length > 1) {
   		content = (

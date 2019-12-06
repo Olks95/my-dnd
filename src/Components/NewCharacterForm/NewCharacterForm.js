@@ -10,16 +10,29 @@ export function NewCharacterForm(props) {
     props.onNewCharacter(data.url, data.api, data.name);
     console.log(data);
   }
-  // console.log(errors);
+  console.log(errors);
   
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h1>Add New Character:</h1>
-      <input className="search-element" type="url" placeholder="Dicecloud URL" name="url" ref={register({required: true})} />
-      <input className="search-element" type="text" placeholder="Dicecloud API" name="api" ref={register} />
-      <input className="search-element" type="text" placeholder="Character Name" name="name" ref={register({required: true})} />
+    <React.Fragment>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>Add New Character:</label>
+        <input className="search-element" type="url" placeholder="Dicecloud URL" name="url" ref={register({required: true})} />
+        <input className="search-element" type="text" placeholder="Dicecloud API" name="api" ref={register} />
+        <input className="search-element" type="text" placeholder="Character Name" name="name" ref={register({required: true})} />
 
-      <input className="my-button" type="submit" />
-    </form>
+        <input className="my-button" type="submit" />
+      </form>
+
+      <ul className="delete-list" >
+        {props.characters.map((charData, index) => (
+          <li key={index} >{charData.name + ' '} 
+            <button className="delete" onClick={props.onRemoveCharacter} value={charData.name} > Remove </button>
+          </li>
+        ))}
+        <li key="removeAll" > 
+          <button className="delete" onClick={props.onRemoveCharacter} value="REMOVE-ALL" >Remove All Characters</button>
+        </li>
+      </ul>
+    </React.Fragment>
   );
 }

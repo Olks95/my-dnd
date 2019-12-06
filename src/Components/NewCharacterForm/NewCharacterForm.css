@@ -1,3 +1,13 @@
 .search-element {
   width: 85%;
 }
+
+.delete-list {
+	margin-top: 2em;
+}
+
+.delete {
+	color: red;
+	font-weight: bold;
+	margin: 0.2em 0;
+}

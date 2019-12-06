@@ -23,25 +23,29 @@ export const useDicecloud = (characterId) => {
 	headers.append('Accept', 'application/json');
 
 	useEffect(() => {
-		setIsLoading(true);
-		// console.log(characterUrls);
+		if(characterId === null) {
+			console.log('No character selected.')
+		} else {
+			setIsLoading(true);
+			// console.log(characterUrls);
 
-		Promise.all(characterUrls.map(url => {
-			// console.log('Sending Http request for ' + url);
-		    return fetch(proxyUrl + url, {
-		    	method: "GET",
-		    	headers: headers,
-		    	mode: 'cors'
-		    }).then(response => response.json())
-		})).then(results => {
-	      		setIsLoading(false);
-	      		// console.log(results)
-	        	setFetchedData(results ? results : new Error('Failed for reasons'));
-      		})
-	      .catch(err => {
-	        console.log(err);
-	        setIsLoading(false);
-	      });
+			Promise.all(characterUrls.map(url => {
+				// console.log('Sending Http request for ' + url);
+			    return fetch(proxyUrl + url, {
+			    	method: "GET",
+			    	headers: headers,
+			    	mode: 'cors'
+			    }).then(response => response.json())
+			})).then(results => {
+		      		setIsLoading(false);
+		      		// console.log(results)
+		        	setFetchedData(results ? results : new Error('Failed for reasons'));
+	      		})
+		      .catch(err => {
+		        console.log(err);
+		        setIsLoading(false);
+		      });
+		}
 	}, [ characterId ]);
 
     return [ isLoading, fetchedData ];
