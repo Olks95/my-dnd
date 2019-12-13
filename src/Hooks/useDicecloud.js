@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
 
-export const useDicecloud = (characterId) => {
+export const useDicecloud = (characters) => {
 	
 	const [ isLoading, setIsLoading ] = useState(false);
 	const [ fetchedData, setFetchedData ] = useState([]);
 
-	// headers.append('Authorization', getToken());
-	// All available character information can be fetched using the following url setup:
-
-	// characterId = 'mLdzKAN7AAGt3qPP2';
 	let characterUrls = [];
-	const APIkey = 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t';
-	if(Array.isArray(characterId)) {
-		characterUrls = characterId.map(charId => `https://dicecloud.com/vmix-character/${charId}?key=${APIkey}`);
+
+	if(characters.length > 1) {
+		characterUrls = characters.map(charObj => `https://dicecloud.com/vmix-character/${charObj.id}?key=${charObj.APIkey}`);
+	} else if(characters.length === 1){
+		characterUrls[0] = `https://dicecloud.com/vmix-character/${characters[0].id}?key=${characters[0].APIkey}`;
 	} else {
-		characterUrls[0] = `https://dicecloud.com/vmix-character/${characterId}?key=${APIkey}`;
+		characterUrls = null;
 	}
 	// console.log(characterUrls);
 	
@@ -23,7 +21,8 @@ export const useDicecloud = (characterId) => {
 	headers.append('Accept', 'application/json');
 
 	useEffect(() => {
-		if(characterId === null) {
+		const abortController = new AbortController();
+		if(characters.length === 0) {
 			console.log('No character selected.')
 		} else {
 			setIsLoading(true);
@@ -34,7 +33,8 @@ export const useDicecloud = (characterId) => {
 			    return fetch(proxyUrl + url, {
 			    	method: "GET",
 			    	headers: headers,
-			    	mode: 'cors'
+			    	mode: 'cors',
+			    	signal: abortController.signal
 			    }).then(response => response.json())
 			})).then(results => {
 		      		setIsLoading(false);
@@ -46,7 +46,10 @@ export const useDicecloud = (characterId) => {
 		        setIsLoading(false);
 		      });
 		}
-	}, [ characterId ]);
+		return () => {
+			abortController.abort();
+		}
+	}, [ characters ]);
 
     return [ isLoading, fetchedData ];
 }

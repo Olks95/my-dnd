@@ -32,8 +32,12 @@ const abilities = ["Strength", "Dexterity", "Constitution", "intelligence", "Wis
 const skills = ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight Of Hand", "Stealth", "Survival"];
 
 const Character = props => {
-  let portraitUrls = props.data.PictureURL.split(', ');
-  let dndClass = props.data.Class.split(" ");
+  let portraitUrls = [];
+  let dndClass = [];
+  if(props.data.PictureURL && props.data.Class) {
+    portraitUrls = props.data.PictureURL.split(', ');
+    dndClass = props.data.Class.split(" ");
+  }
 
   return (
     <React.Fragment>
@@ -49,7 +53,7 @@ const Character = props => {
             <div className="character-left">
               <div className="character-ability-scores">
                 {abilities.map(ability => (
-                  <CharAbility ability={ability} abilityMod={ability+"Mod"} data={props.data}  key={ability + ' ' + props.data.Name} />
+                  <CharAbility ability={ability} abilityMod={ability+"Mod"} data={props.data} stil="character" key={ability + ' ' + props.data.Name} />
                 ))}
               </div>
             </div>

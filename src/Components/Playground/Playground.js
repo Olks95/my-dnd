@@ -14,6 +14,9 @@ const components = {
 // const query = 'Aid';
 
 const Playground = (props) => {
+//The below was created in an attempt to make the component call variable, and it does seem to work, although I didn't
+//end up making a selector for this. I keep it in here mostly to show how I could do it if I wanted to implement a
+//complete change of what is displayed in each section of the webpage, example swap player and worldmap locations.
 	const ElementOne = components['player'];
 	const ElementTwo = components['spellbook'];
 	const ElementThree = components['worldmap'];
@@ -47,8 +50,9 @@ const Playground = (props) => {
 	        	<div className="flex-item">
 	        		<div className="flex-item-header">
 		        		<select 
+		        			id="characterSelector"
 		        			onChange={props.onCharSelect}
-		        			data-value={props.selectedChar}
+		        			data-value={props.selectedChar.id}
 		        			className="select-css"
 		        		>
 		        		{props.characters.map(char => (
@@ -59,7 +63,7 @@ const Playground = (props) => {
 		        			{summary}
 		        		</select>
 	        		</div>
-	        		<div className="characterContainer">
+	        		<div className="character-container">
 		        		<ElementOne selectedChar={props.selectedChar} characters={props.characters} />
 	        		</div>
 	        		<div className="add-character">
@@ -87,7 +91,7 @@ const Playground = (props) => {
 						</div>
 					</form>
 	        		</div>
-	        		<div className="spellContainer">
+	        		<div className="spell-container">
 	        			<ElementTwo selectedResource={props.selectedResource} query={props.query} />
 	        		</div>
 	        	
@@ -106,12 +110,12 @@ const Playground = (props) => {
 	        			))}
 	        		</select>
 	        		</div>
-	        		<div className="mapContainer">
+	        		<div className="map-container">
 		        		<ElementThree maps={props.maps} selectedMap={props.selectedMap} />
 	        		</div>
 	        	</div>
 	        </div>
-	        <button onClick={props.onReturn} value='' >Return</button>
+	        <button className="my-button bottom" onClick={props.onReturn} value='' >Return</button>
 		</React.Fragment>
 	)
 }

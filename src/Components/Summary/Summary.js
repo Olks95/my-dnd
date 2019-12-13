@@ -1,8 +1,12 @@
 import React from 'react';
+import './Summary.css';
 
-import { CharacterAbility, /*CharStat,*/ CharProf } from '../CharacterAbility';
+import { CharAbility, /*CharStat,*/ CharProf } from '../CharacterAbility';
 
 const Summary = props => {
+	const abilities = ["Strength", "Dexterity", "Constitution", "intelligence", "Wisdom", "Charisma"];
+	const skills = ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight Of Hand", "Stealth", "Survival"];
+
 	// const passivePerceptions = (charIndex) => {
 	// 	return (
 	// 		<CharStat stat="passivePerception" statProficiency="PerceptionProficiency" data={props.data[charIndex][0]}  key={"passPerception " + props.data[charIndex][0].Name} />
@@ -20,30 +24,37 @@ const Summary = props => {
     	)
     }
 
-    // const abilityScores()
+    const abilityScores = (ability, charIndex) => {
+    	return (
+    		<CharAbility ability={ability} abilityMod={ability+'Mod'} data={props.data[charIndex][0]} stil="summary" key={ability + props.data[charIndex][0].Name} />
+    	)
+    }
 
     const characterSummary = (charIndex) => {
     	return (
-    		<React.Fragment key={props.data[charIndex][0].Name} >
-	    		<div className="character-summary">
-			    	<p>{props.data[charIndex][0].Name}</p>
-			    	<p>Proficiency Bonus: {}</p>
-			    	{abilities.map(charStat => proficiencies(charStat + " Save", charIndex))}
-			    	{skills.map(charStat => proficiencies(charStat, charIndex))}
-			    	<p><CharProf stat="passivePerception" statProficiency="PerceptionProficiency" data={props.data[charIndex][0]}  key={"passPerception " + props.data[charIndex][0].Name} /></p>
-	    		</div>
+    		<React.Fragment key={"Character " + charIndex + " out of " + props.data.length} >
+		    	{/*<p>{props.data[charIndex][0].Name}</p>
+		    	<p>Proficiency Bonus: {}</p>*/}
+		    	<div className="summary-item">
+			    	<h1 className="summary-name" >{props.data[charIndex][0].Name}</h1>
+		    		{abilities.map(ability => abilityScores(ability, charIndex))}
+		    		<div className="summary-proficiencies">
+				    	{abilities.map(ability => proficiencies(ability + " Save", charIndex))}
+				    	{skills.map(charStat => proficiencies(charStat, charIndex))}
+				    	<CharProf stat="passivePerception" statProficiency={true} data={props.data[charIndex][0]}  key={"passPerception " + props.data[charIndex][0].Name} />
+		    		</div>
+		    	</div>
 	    	</React.Fragment>
     	)
     }
 
 
-	const abilities = ["Strength", "Dexterity", "Constitution", "intelligence", "Wisdom", "Charisma"];
-	const skills = ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight Of Hand", "Stealth", "Survival"];
 
 	return (
 	    <React.Fragment>
-	    	<h1>SUMMARY BABY</h1>
-	    	{props.data.map((charData, index) => characterSummary(index))}
+	    	{props.data.map((charData, index) => (
+	    		characterSummary(index))
+	    	)}
 	    </React.Fragment>
 	)
 }

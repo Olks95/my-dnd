@@ -28,9 +28,11 @@ export const Player = (props) => {
   		if(fetchedData.length > 1) {
   		content = (
 			<React.Fragment>
-				<Summary 
-					data={fetchedData}
-				/>
+				<div className="summary-parent">
+					<Summary
+						data={fetchedData}
+					/>
+				</div>
 			</React.Fragment>
 		)} else {
   		content = (

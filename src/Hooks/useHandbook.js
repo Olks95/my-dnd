@@ -24,11 +24,12 @@ export const useHandbook = (category, query) => {
 	let headers = new Headers();
 	headers.append('Accept', 'application/json');
 
-	const fetchData = (url) => {
+	const fetchData = (url, abortController) => {
 		setIsLoading(true);
 		fetch(url, {
 			method: "GET",
-			headers: headers
+			headers: headers,
+			signal: abortController.signal
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -36,7 +37,8 @@ export const useHandbook = (category, query) => {
 				fetch('https://cors-anywhere.herokuapp.com/' + data.results[0]['url'], {
       				method: "GET",
       				headers: headers,
-      				mode: 'cors'
+      				mode: 'cors',
+      				signal: abortController.signal
       			})
       			.then(response => response.json())
       			.then(data => {
@@ -65,7 +67,11 @@ export const useHandbook = (category, query) => {
 	};
 
 	useEffect(() => {
-		fetchData(getQuery())
+		const abortController = new AbortController();
+		fetchData(getQuery(), abortController)
+		return () => {
+			abortController.abort();
+		}
 	}, [category, query]);
 	return [ queryResult, error, isLoading ];
 };

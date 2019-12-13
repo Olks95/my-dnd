@@ -2,7 +2,7 @@
 
 This app will be my first self made project where I use React to create my webpage. Previous projects have for the most part been given as part of a course or similar.
 
-The goal with this app is that I can use this with my current or future dnd teams as an online source for sharing information between players and dungeon master.
+The goal with this app is to create a webpage I can use with my current or future dnd teams as an online source for sharing information between players and dungeon master.
 
 Because of a currently limited experience with web development this will be mostly a training exercise for me to develop my skills. I will most likely not use a database at this point, which will likely limit the usefulness if not making it completely useless. Either way it will be a good start that I can in the future take to the next level.
 If it turns out I would have to use a database, I will likely use static examples to simulate data.

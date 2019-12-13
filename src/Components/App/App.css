@@ -1,3 +1,16 @@
 .main {
-  text-align: center;
+	text-align: center;
+	margin-bottom: 3em;
+}
+
+.footer {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	text-align: center;
+	color: white;
+	background-color: rgba(59, 65, 77, 0.7);
+	padding: 0.15em;
+	font-size: 0.7em;
 }

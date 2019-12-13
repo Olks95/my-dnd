@@ -4,13 +4,14 @@ import React from 'react';
 export const CharAbility = ({
 	ability,
 	abilityMod,
+	stil,
 	data
 }) => {
 	return (
-		<div className="character-abilities">
-		  <h2 className="character-ability"> {ability} </h2>
-		  <p className="character-ability-score" id={ability}> {data[ability]} </p>
-		  <p className="character-ability-modifier" id={ability+"Mod"}> {data[abilityMod]} </p>
+		<div className={stil + "-abilities"}>
+		  <h2 className={stil + "-ability"}> {ability} </h2>
+		  <p className={stil + "-ability-score"} id={ability}> {data[ability]} </p>
+		  <p className={stil + "-ability-modifier"} id={ability+"Mod"}> {data[abilityMod]} </p>
 		</div>
 	);
 }
@@ -37,10 +38,13 @@ export const CharProf = ({
 	data
 }) => {
 	const cleanStat = stat.replace(/\s+/g, '');
-	const cleanStatProficiency = statProficiency.replace(/\s+/g, '');
-	if(data[cleanStatProficiency]) {
+	let cleanStatProficiency;
+	if(typeof statProficiency === 'string') {
+		cleanStatProficiency = statProficiency.replace(/\s+/g, '');
+	};
+	if(data[cleanStatProficiency] || statProficiency === true) {
 		return (
-			<span>{stat} {data[cleanStat]} </span>
+			<p>{stat} {data[cleanStat]} </p>
 		)
 	} else return null;
 }

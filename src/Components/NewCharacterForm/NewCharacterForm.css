@@ -11,3 +11,8 @@
 	font-weight: bold;
 	margin: 0.2em 0;
 }
+
+.input-error {
+	margin-top: 0.2em;
+	color: darkred;
+}
