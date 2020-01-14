@@ -13,9 +13,9 @@ const App = () => {
       name: 'Harley Merlin'
     },
     {
-      id: 'siQfxrFNzgWHoQk39',
+      id: 'f7rZWpSiorNDNv5Qp',
       APIkey: 'QRryrEJEF27FDcPsZgWZZvhHhf5a3t',
-      name: 'Surina Kerrhylon'
+      name: 'Shrek'
     },
     {
       id: 'xS8JoRmvpsnjm529p',
@@ -74,7 +74,7 @@ const App = () => {
   const addCharacterHandler = (characterUrl, apiKey, characterName) => {
     const characterId = characterUrl.match(/character\/\w*\//g)[0].split('/')[1];
     let newSelection = [];
-    console.log(characterId, apiKey, characterName);
+    // console.log(characterId, apiKey, characterName);
     if(!characterList.some(obj => obj.id === characterId)) { //If characterId is unique, add create a new character
       const newCharacterList = [...characterList, { id: characterId, APIkey: apiKey, name: characterName }];
       setCharacterList(newCharacterList);

@@ -14,9 +14,9 @@ export const useHandbook = (category, query) => {
 				const upper = word.charAt(0).toUpperCase() + word.substring(1);
 				newQuery.push(upper);
 			});
-			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api/' + category + '/?name=' + newQuery.join('+');
+			newUrl = 'https://cors-anywhere.herokuapp.com/https://dnd5eapi.co/api/' + category + '/?name=' + newQuery.join('+');
 		} else {
-			newUrl = 'https://cors-anywhere.herokuapp.com/http://dnd5eapi.co/api/' + category;
+			newUrl = 'https://cors-anywhere.herokuapp.com/https://dnd5eapi.co/api/' + category;
 		}
 		return newUrl;
 	}
@@ -25,6 +25,8 @@ export const useHandbook = (category, query) => {
 	headers.append('Accept', 'application/json');
 
 	const fetchData = (url, abortController) => {
+		console.log(query);
+		console.log(url);
 		setIsLoading(true);
 		fetch(url, {
 			method: "GET",
