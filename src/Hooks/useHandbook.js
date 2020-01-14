@@ -25,8 +25,6 @@ export const useHandbook = (category, query) => {
 	headers.append('Accept', 'application/json');
 
 	const fetchData = (url, abortController) => {
-		console.log(query);
-		console.log(url);
 		setIsLoading(true);
 		fetch(url, {
 			method: "GET",
@@ -36,6 +34,7 @@ export const useHandbook = (category, query) => {
 		.then(response => response.json())
 		.then(data => {
 			if(data.count === 1) {
+				// The API changed how they answered queries... This used to work...
 				fetch('https://cors-anywhere.herokuapp.com/' + data.results[0]['url'], {
       				method: "GET",
       				headers: headers,
@@ -56,9 +55,25 @@ export const useHandbook = (category, query) => {
 				console.log('Nothing found. Make sure you use the right resource')
 				setIsLoading(false);
 			} else {
-				console.log('More than 1 result... To be dealt with in future version.')
-				setIsLoading(false);
-				setQueryResult(data);
+				// Had to add this when the API changed how it responded to queries...
+				const queriedObject = data.results.find(object => object.name === query);
+				const finalUrl = queriedObject.url;
+				fetch('https://cors-anywhere.herokuapp.com/https://dnd5eapi.co' + finalUrl, {
+      				method: "GET",
+      				headers: headers,
+      				mode: 'cors',
+      				signal: abortController.signal
+      			})
+      			.then(response => response.json())
+      			.then(data => {
+      				setIsLoading(false);
+					setQueryResult(data);
+      			})
+      			.catch(error => {
+      				console.log('2: ' + error);
+      				setIsLoading(false);
+      				setError(error);
+      			})
 			}
 		})
 		.catch(error => {
