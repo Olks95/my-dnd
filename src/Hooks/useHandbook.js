@@ -29,7 +29,7 @@ export const useHandbook = (category, query) => {
 		fetch(url, {
 			method: "GET",
 			headers: headers,
-			signal: abortController.signal
+			// signal: abortController.signal
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -39,7 +39,7 @@ export const useHandbook = (category, query) => {
       				method: "GET",
       				headers: headers,
       				mode: 'cors',
-      				signal: abortController.signal
+      				// signal: abortController.signal
       			})
       			.then(response => response.json())
       			.then(data => {
@@ -61,7 +61,7 @@ export const useHandbook = (category, query) => {
 	      				method: "GET",
 	      				headers: headers,
 	      				mode: 'cors',
-	      				signal: abortController.signal
+	      				// signal: abortController.signal
 	      			})
 	      			.then(response => response.json())
 	      			.then(data => {
