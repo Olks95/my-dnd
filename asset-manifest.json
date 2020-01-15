@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/my-dnd/static/css/main.86c00371.chunk.css",
-    "main.js": "/my-dnd/static/js/main.7fdaeb26.chunk.js",
-    "main.js.map": "/my-dnd/static/js/main.7fdaeb26.chunk.js.map",
+    "main.css": "/my-dnd/static/css/main.f0554155.chunk.css",
+    "main.js": "/my-dnd/static/js/main.7742ff58.chunk.js",
+    "main.js.map": "/my-dnd/static/js/main.7742ff58.chunk.js.map",
     "runtime-main.js": "/my-dnd/static/js/runtime-main.96b9ab7a.js",
     "runtime-main.js.map": "/my-dnd/static/js/runtime-main.96b9ab7a.js.map",
     "static/js/2.56a8d993.chunk.js": "/my-dnd/static/js/2.56a8d993.chunk.js",
     "static/js/2.56a8d993.chunk.js.map": "/my-dnd/static/js/2.56a8d993.chunk.js.map",
     "index.html": "/my-dnd/index.html",
-    "precache-manifest.c16e59dad3298ce12498bfe70de35483.js": "/my-dnd/precache-manifest.c16e59dad3298ce12498bfe70de35483.js",
+    "precache-manifest.edf73cf73a198dcf7819bdf0a12ea27e.js": "/my-dnd/precache-manifest.edf73cf73a198dcf7819bdf0a12ea27e.js",
     "service-worker.js": "/my-dnd/service-worker.js",
-    "static/css/main.86c00371.chunk.css.map": "/my-dnd/static/css/main.86c00371.chunk.css.map",
-    "static/js/2.56a8d993.chunk.js.LICENSE": "/my-dnd/static/js/2.56a8d993.chunk.js.LICENSE"
+    "static/css/main.f0554155.chunk.css.map": "/my-dnd/static/css/main.f0554155.chunk.css.map",
+    "static/js/2.56a8d993.chunk.js.LICENSE": "/my-dnd/static/js/2.56a8d993.chunk.js.LICENSE",
+    "static/media/Character.css": "/my-dnd/static/media/ArmorClass.90b865fd.png"
   },
   "entrypoints": [
     "static/js/runtime-main.96b9ab7a.js",
     "static/js/2.56a8d993.chunk.js",
-    "static/css/main.86c00371.chunk.css",
-    "static/js/main.7fdaeb26.chunk.js"
+    "static/css/main.f0554155.chunk.css",
+    "static/js/main.7742ff58.chunk.js"
   ]
 }
