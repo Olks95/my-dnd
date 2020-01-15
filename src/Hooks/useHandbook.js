@@ -51,29 +51,35 @@ export const useHandbook = (category, query) => {
       				setIsLoading(false);
       				setError(error);
       			})
-			} else if(data.count === 0) {
-				console.log('Nothing found. Make sure you use the right resource')
-				setIsLoading(false);
-			} else {
+			} else if (data.count > 1) {
 				// Had to add this when the API changed how it responded to queries...
 				const queriedObject = data.results.find(object => object.name === newQuery);
-				const finalUrl = queriedObject.url;
-				fetch('https://cors-anywhere.herokuapp.com/https://dnd5eapi.co' + finalUrl, {
-      				method: "GET",
-      				headers: headers,
-      				mode: 'cors',
-      				signal: abortController.signal
-      			})
-      			.then(response => response.json())
-      			.then(data => {
-      				setIsLoading(false);
-					setQueryResult(data);
-      			})
-      			.catch(error => {
-      				console.log('2: ' + error);
-      				setIsLoading(false);
-      				setError(error);
-      			})
+				let finalUrl;
+				if (queriedObject) {
+					finalUrl = queriedObject.url;
+					fetch('https://cors-anywhere.herokuapp.com/https://dnd5eapi.co' + finalUrl, {
+	      				method: "GET",
+	      				headers: headers,
+	      				mode: 'cors',
+	      				signal: abortController.signal
+	      			})
+	      			.then(response => response.json())
+	      			.then(data => {
+	      				setIsLoading(false);
+						setQueryResult(data);
+	      			})
+	      			.catch(error => {
+	      				console.log('2: ' + error);
+	      				setIsLoading(false);
+	      				setError(error);
+	      			})
+				} else {
+					console.log('Nothing found. Make sure you use the right resource')
+					setIsLoading(false);
+				}
+			} else {
+				console.log('Nothing found. Make sure you use the right resource')
+				setIsLoading(false);
 			}
 		})
 		.catch(error => {
