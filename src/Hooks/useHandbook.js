@@ -7,8 +7,8 @@ export const useHandbook = (category, query) => {
 
 	const getQuery = () => {
 		let newUrl = '';
+		let newQuery = [];
 		if(query) {
-			const newQuery = [];
 			const splitQuery = query.split(' ');
 			splitQuery.forEach(word => {
 				const upper = word.charAt(0).toUpperCase() + word.substring(1);
@@ -18,13 +18,13 @@ export const useHandbook = (category, query) => {
 		} else {
 			newUrl = 'https://cors-anywhere.herokuapp.com/https://dnd5eapi.co/api/' + category;
 		}
-		return newUrl;
+		return [ newUrl, newQuery.join(' ') ];
 	}
 
 	let headers = new Headers();
 	headers.append('Accept', 'application/json');
 
-	const fetchData = (url, abortController) => {
+	const fetchData = ([url, newQuery], abortController) => {
 		setIsLoading(true);
 		fetch(url, {
 			method: "GET",
@@ -56,7 +56,7 @@ export const useHandbook = (category, query) => {
 				setIsLoading(false);
 			} else {
 				// Had to add this when the API changed how it responded to queries...
-				const queriedObject = data.results.find(object => object.name === query);
+				const queriedObject = data.results.find(object => object.name === newQuery);
 				const finalUrl = queriedObject.url;
 				fetch('https://cors-anywhere.herokuapp.com/https://dnd5eapi.co' + finalUrl, {
       				method: "GET",
