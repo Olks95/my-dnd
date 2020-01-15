@@ -204,12 +204,12 @@
 }
 
 .character-armor-class {
-	background-image: url(./ArmorClass.png);
+	background-image: url(/ArmorClass.png);
 	width: 2.3em;
 	/*border: 1px solid black;*/
 }
 .character-health-points {
-	background-image: url(./Health.png);
+	background-image: url(/Health.png);
 	width: 3em;
 	/*border: 1px solid black;*/
 }
